@@ -1,5 +1,5 @@
 //map control
-const gDisableMap = true;
+const gDisableMap = false;
 
 //facial detection update interval
 const gRecognitionUpdateRate = 100;
@@ -8,7 +8,7 @@ const gRecognitionUpdateRate = 100;
 const gModelServerPort = 8770;
 
 //enable or disable debugging console
-const gEnableConsole = true;
+const gEnableConsole = false;
 
 //enable or disable facial recognition
 const gEnableFacialRecognition = true;
