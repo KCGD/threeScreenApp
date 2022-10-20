@@ -1,3 +1,6 @@
+//init the debugger
+InitDebug();
+
 window.onload = function() {
     const swipeElement = document.getElementById("swipeElement");
     window["swipeElement"] = new Swipe(swipeElement, {
@@ -10,6 +13,11 @@ window.onload = function() {
     });
     //initialize pages
     InitCalculator();
+
+    //debugging
+    if(gEnableConsole) {
+        var vConsole = new window.VConsole();
+    }
 
     //location stuff
     const currentLocation = InitLocation();
@@ -24,7 +32,9 @@ window.onload = function() {
 
     //webcam
     front.send("initModelServer", gModelServerPort);
+    console.log(`INFO | MODEL SERVER | Starting...`)
     front.on("initModelServerSuccess", function() {
+        console.log(`INFO | MODEL SERVER | Started!`);
         InitWebcam();
     })
 }

@@ -29,7 +29,6 @@ function InitWebcam() {
             //detection loop
             detectionLoop = setInterval(async function() {
                 const detectedFaces = await faceapi.detectAllFaces(videoElement, new faceapi.TinyFaceDetectorOptions()).withFaceLandmarks().withFaceExpressions();
-                console.log(detectedFaces);
 
                 //clear canvas
                 canvas.getContext('2d').clearRect(0, 0, canvas.width, canvas.height);

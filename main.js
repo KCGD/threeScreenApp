@@ -14,7 +14,7 @@ back.on('initModelServer', function(port) {
 	if(!modelServer) {
 		modelServer = http.createServer(function(req, res) {
 			if(req.url) {
-				let modelPath = path.join('./assets/Face-Detection-JavaScript/models', path.basename(req.url));
+				let modelPath = path.join(__dirname, './assets/Face-Detection-JavaScript/models', path.basename(req.url));
 				if(fs.existsSync(modelPath)) {
 					const modelStats = fs.statSync(modelPath);
 					let readStream = fs.createReadStream(modelPath);
@@ -26,6 +26,7 @@ back.on('initModelServer', function(port) {
 					})
 				} else {
 					console.log(`REQUEST | 404 | ${modelPath}`);
+					back.send("ServerError404", modelPath);
 					res.writeHead(404, {'Access-Control-Allow-Origin':"*"});
 					res.end(`could not find: ${modelPath}`);
 				}

@@ -8,8 +8,9 @@
 
 .webcamCanvasWrapper {
     position: absolute;
-    left:0;
-    top:0;
+    left:-25%;
+    top:68%;
+    transform:translate(0, -50%);
     width:100%;
     height:100%;
     z-index: 2;
