@@ -1,58 +1,129 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>Webview Example</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <title>Webview Example</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script type="text/javascript" src="../node_modules/androidjs/lib/androidjs.js"></script>
+  </head>
 
-	<link rel="stylesheet" href="../assets/bootstrap.min.css">
+  <body>
+    <!--SCRIPT IMPORTS-->
+      <script type="text/javascript" src = "../assets/lib/script.js"></script>
+      <script src="../assets/lib/jquery-3.3.1.slim.min.js"></script>
+      <script src="../assets/lib/popper.min.js"></script>
+      <script src="../assets/lib/bootstrap.min.js"></script>
+      <script src="../assets/lib/swipe.js"></script> <!--swipe lib-->
+      <script src="../assets/calculator.js"></script> <!--calculator page-->
+        <script src="../assets/lib/math.js"></script> <!--math lib for calculator-->
+      <script src="../assets/main.js"></script> <!--main script-->
+    <!--END SCRIPT IMPORTS-->
 
-	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-	<script type="text/javascript" src="../node_modules/androidjs/lib/androidjs.js"></script>
-</head>
+    <!--STYLE IMPORTS-->
+      <link rel="stylesheet" href="../assets/style/bootstrap.min.css">
+      <link rel="stylesheet" href="../assets/style/calculator.css">
+    <!--END STYLE IMPORTS-->
 
-<style>
-	.app{
-		font-size:30px;
-	}
-</style>
+    <style>
+      /*SWIPE CSS*/
+        .swipe {
+          overflow: hidden;
+          visibility: hidden;
+          position: absolute;
+          left:0;
+          top:0;
+          width:100%;
+          height:100%;
+        }
+        .swipe-wrap {
+          overflow: hidden;
+          position: absolute;
+          left:0;
+          top:0;
+          width:100%;
+          height:100%;
+        }
+        .swipe-wrap > div {
+          float: left;
+          width: 100%;
+          height:100%;
+          position: relative;
+        }
+      /*SWIPE CSS*/
 
-<body>
+      /*FRAMES*/
+        .frame {
+          position: absolute;
+          top:0;
+          left:0;
+          width:100%;
+          height:100%;
+        }
+      /*FRAMES*/
+    </style>
 
-<div class="container h-100 d-flex justify-content-center">
-    <div class="jumbotron my-auto">
-      <h3 class="display-3" id='msg'>Hello, world!</h3>
+    <div id="swipeElement" class="swipe">
+      <div class="swipe-wrap">
+
+        <!-- calculator-->
+        <div class="frame" id="calculatorFrame" style="background-color: var(--color-primary);">
+          <!--theme switcher-->
+          <div class="themeSwitcher" id="themeSwitcher" onclick="toggleTheme()">
+            <div class="themeIcon"></div>
+          </div>
+
+          <!--text ara-->
+          <textarea class="textField" id="mathArea" readonly></textarea>
+
+          <!--special operation buttons (sin, cos, etc)-->
+          <div class="lowerHorizontalButtons" style="overflow-x:scroll; overflow-y: hidden; white-space: nowrap;">
+            <div class="button-horizontal" onclick="registerSpecial(this)" style="width:23%"><div class="button-text">sin()</div></div>
+            <div class="button-horizontal" onclick="registerSpecial(this)" style="width:23%"><div class="button-text">cos()</div></div>
+            <div class="button-horizontal" onclick="registerSpecial(this)" style="width:23%"><div class="button-text">tan()</div></div>
+            <div class="button-horizontal" onclick="registerSpecial(this)" style="width:23%"><div class="button-text">√()</div></div>
+            <div class="button-horizontal" onclick="register(this)" style="width:23%"><div class="button-text">^</div></div>
+            <div class="button-horizontal" onclick="register(this)" style="width:23%"><div class="button-text">(</div></div>
+            <div class="button-horizontal" onclick="register(this)" style="width:23%"><div class="button-text">)</div></div>
+            <div class="button-horizontal" onclick="register(this)" style="width:23%"><div class="button-text">PI</div></div>
+          </div>
+
+          <!--arrow keys and clear/delete-->
+          <div class="lowerHorizontalButtons" style="bottom:74%;">
+            <div class="button-horizontal" onclick="moveCursor(1)"><div class="button-text">←</div></div>
+            <div class="button-horizontal" onclick="moveCursor(-1)"><div class="button-text">→</div></div>
+            <div class="button-horizontal" style="background-color:rgb(247, 69, 69)" onclick="registerOperation(this)"><div class="button-text">CLR</div></div>
+            <div class="button-horizontal" style="background-color:rgb(247, 69, 69)" onclick="registerOperation(this)"><div class="button-text">DEL</div></div>
+          </div>
+
+          <!--the keypad containing all numbers, period, equals button and basic operations (+-x/)-->
+          <div class="numberContainer">
+            <div class="button-numberField" onclick="register(this)"><div class="button-text">7</div></div>
+            <div class="button-numberField" onclick="register(this)"><div class="button-text">8</div></div>
+            <div class="button-numberField" onclick="register(this)"><div class="button-text">9</div></div>
+            <div class="button-oprField" onclick="register(this)"><div class="button-text">/</div></div>
+
+            <div class="button-numberField" onclick="register(this)"><div class="button-text">4</div></div>
+            <div class="button-numberField" onclick="register(this)"><div class="button-text">5</div></div>
+            <div class="button-numberField" onclick="register(this)"><div class="button-text">6</div></div>
+            <div class="button-oprField" onclick="register(this)"><div class="button-text">*</div></div>
+
+            <div class="button-numberField" onclick="register(this)"><div class="button-text">1</div></div>
+            <div class="button-numberField" onclick="register(this)"><div class="button-text">2</div></div>
+            <div class="button-numberField" onclick="register(this)"><div class="button-text">3</div></div>
+            <div class="button-oprField" onclick="register(this)"><div class="button-text">-</div></div>
+
+            <div class="button-numberField" onclick="register(this)"><div class="button-text">.</div></div>
+            <div class="button-numberField" onclick="register(this)"><div class="button-text">0</div></div>
+            <div class="button-numberField" onclick="registerOperation(this)" style="background-color: var(--color-accent)"><div class="button-text">=</div></div>
+            <div class="button-oprField" onclick="register(this)"><div class="button-text">+</div></div>
+          </div>
+        </div>
+        <div class="frame" style="background-color: green;"></div>
+        <div class="frame" style="background-color: blue;"></div>
+      </div>
     </div>
- </div>
 
-<script type="text/javascript" src = "../assets/script.js"></script>
-<script src="../assets/jquery-3.3.1.slim.min.js"></script>
-<script src="../assets/popper.min.js"></script>
-<script src="../assets/bootstrap.min.js"></script>
-<style type="text/css">
-  html, body {
-    height: 100%;
-  }
-
-  .container {
-    padding: 0px;
-  }
-
-  .display-3 {
-    font-size: 2.0rem;
-  }
-
-  .jumbotron {
-    background: #fff;
-  }
-
-</style>
-<script type="text/javascript">
-	function toggle_popover() {
-		$('#popover').popover('toggle')
-	}
-</script>
-</body>
-
+  </body>
 </html>
 
 <!--
