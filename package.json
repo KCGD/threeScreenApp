@@ -21,7 +21,8 @@
     "author": "",
     "license": "ISC",
     "dependencies": {
-        "androidjs": "^2.0.6"
+        "androidjs": "^2.0.6",
+        "androidjs-builder": "^2.3.2"
     },
     "project-name": "threeScreen",
     "theme": {
