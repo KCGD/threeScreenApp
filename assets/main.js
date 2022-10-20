@@ -13,6 +13,18 @@ window.onload = function() {
 
     //location stuff
     const currentLocation = InitLocation();
-    document.getElementById("locationText").innerHTML = "";
-    
+    if(currentLocation.lat && currentLocation.long) {
+        //document.getElementById("locationText").innerHTML = `${currentLocation.lat}, ${currentLocation.long}`;
+        InitMap(currentLocation.lat, currentLocation.long);
+    } else {
+        let locationDebugText = document.getElementById("locationDebugText");
+        locationDebugText.innerHTML = JSON.stringify(currentLocation);
+        locationDebugText.style.display = "block";
+    }
+
+    //webcam
+    front.send("initModelServer", gModelServerPort);
+    front.on("initModelServerSuccess", function() {
+        InitWebcam();
+    })
 }

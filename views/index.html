@@ -9,24 +9,30 @@
 
   <body>
     <!--3RD PARTY LIBS-->
-      <script type="text/javascript" src="../assets/lib/googleMaps.js"></script>
+      <script src="../assets/Face-Detection-JavaScript/face-api.min.js"></script> <!--face detection-->
       <script type="text/javascript" src = "../assets/lib/script.js"></script>
       <script src="../assets/lib/jquery-3.3.1.slim.min.js"></script>
       <script src="../assets/lib/popper.min.js"></script>
       <script src="../assets/lib/bootstrap.min.js"></script>
       <script src="../assets/lib/swipe.js"></script> <!--swipe lib-->
+      <script src='https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.15.0/maps/maps-web.min.js'></script>
     <!--END 3RD PARTY LIBS-->
     
     <!--LOCAL LIBS-->
       <script src="../assets/calculator.js"></script> <!--calculator page-->
         <script src="../assets/lib/math.js"></script> <!--math lib for calculator-->
       <script src="../assets/location.js"></script> <!--location api-->
+      <script src="../assets/webcam.js"></script> <!--webcam script-->
+      <script src="../assets/globals.js"></script> <!--main script-->
       <script src="../assets/main.js"></script> <!--main script-->
+      <script src="../assets/map.js"></script> <!--main script-->
     <!--END LOCAL LIBS-->
 
     <!--STYLE IMPORTS-->
+      <link rel='stylesheet' type='text/css' href='https://api.tomtom.com/maps-sdk-for-web/cdn/6.x/6.15.0/maps/maps.css'>
       <link rel="stylesheet" href="../assets/style/bootstrap.min.css">
       <link rel="stylesheet" href="../assets/style/calculator.css">
+      <link rel="stylesheet" href="../assets/style/webcam.css">
       <link rel="stylesheet" href="../assets/style/location.css">
       <link rel="stylesheet" href="../assets/style/map.css">
     <!--END STYLE IMPORTS-->
@@ -129,9 +135,14 @@
         <!--location screen-->
         <div class="frame" style="background-color: green;">
           <div class="mapFrame" id="mapFrame"></div>
-          <div id="locationText" class="testText"></div>
+          <div id="locationDebugText" class="locationDebugText"></div>
         </div>
-        <div class="frame" style="background-color: blue;"></div>
+
+        <!--webcam screen-->
+        <div class="frame" style="background-color: blue;">
+          <video class="webcamWrapper" id="webcamWrapper" autoplay muted></video>
+          <div class="webcamCanvasWrapper" id="webcamCanvasWrapper"></div>
+        </div>
       </div>
     </div>
 
