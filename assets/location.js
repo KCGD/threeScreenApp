@@ -12,5 +12,5 @@ function InitLocation () {
         }
     }
 
-    return JSON.parse(location);
+    return (location);
 }
