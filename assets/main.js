@@ -8,7 +8,11 @@ window.onload = function() {
         callback: function(index, element){},
         transitionEnd: function(index, element){}
     });
-
     //initialize pages
     InitCalculator();
+
+    //location stuff
+    const currentLocation = InitLocation();
+    document.getElementById("locationText").innerHTML = "";
+    
 }

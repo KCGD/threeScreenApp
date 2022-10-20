@@ -8,20 +8,27 @@
   </head>
 
   <body>
-    <!--SCRIPT IMPORTS-->
+    <!--3RD PARTY LIBS-->
+      <script type="text/javascript" src="../assets/lib/googleMaps.js"></script>
       <script type="text/javascript" src = "../assets/lib/script.js"></script>
       <script src="../assets/lib/jquery-3.3.1.slim.min.js"></script>
       <script src="../assets/lib/popper.min.js"></script>
       <script src="../assets/lib/bootstrap.min.js"></script>
       <script src="../assets/lib/swipe.js"></script> <!--swipe lib-->
+    <!--END 3RD PARTY LIBS-->
+    
+    <!--LOCAL LIBS-->
       <script src="../assets/calculator.js"></script> <!--calculator page-->
         <script src="../assets/lib/math.js"></script> <!--math lib for calculator-->
+      <script src="../assets/location.js"></script> <!--location api-->
       <script src="../assets/main.js"></script> <!--main script-->
-    <!--END SCRIPT IMPORTS-->
+    <!--END LOCAL LIBS-->
 
     <!--STYLE IMPORTS-->
       <link rel="stylesheet" href="../assets/style/bootstrap.min.css">
       <link rel="stylesheet" href="../assets/style/calculator.css">
+      <link rel="stylesheet" href="../assets/style/location.css">
+      <link rel="stylesheet" href="../assets/style/map.css">
     <!--END STYLE IMPORTS-->
 
     <style>
@@ -118,7 +125,12 @@
             <div class="button-oprField" onclick="register(this)"><div class="button-text">+</div></div>
           </div>
         </div>
-        <div class="frame" style="background-color: green;"></div>
+
+        <!--location screen-->
+        <div class="frame" style="background-color: green;">
+          <div class="mapFrame" id="mapFrame"></div>
+          <div id="locationText" class="testText"></div>
+        </div>
         <div class="frame" style="background-color: blue;"></div>
       </div>
     </div>

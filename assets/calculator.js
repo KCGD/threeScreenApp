@@ -1,5 +1,5 @@
 //globals
-let currentTheme = "light";
+let currentTheme = "dark";
 let currentEquation = "";
 let mathArea;
 //position is inverse (0 = end of the line)
