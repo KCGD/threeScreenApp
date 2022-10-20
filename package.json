@@ -1,0 +1,29 @@
+{
+    "version": "1.0.0",
+    "name": "threeScreen",
+    "app-name": "threeScreen",
+    "package-name": "threeScreen",
+    "project-type": "webview",
+    "icon": "./assets/icon/icon.png",
+    "dist-path": "./dist",
+    "permission": [
+        "android.permission.INTERNET",
+        "android.permission.ACCESS_FINE_LOCATION",
+        "android.permission.ACCESS_COARSE_LOCATION"
+    ],
+    "description": "",
+    "main": "main.js",
+    "scripts": {
+        "start:dev": "node .",
+        "build": "androidjs build"
+    },
+    "author": "",
+    "license": "ISC",
+    "dependencies": {
+        "androidjs": "^2.0.2"
+    },
+    "project-name": "threeScreen",
+    "theme": {
+        "fullScreen": true
+    }
+}
