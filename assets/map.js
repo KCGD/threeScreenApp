@@ -20,12 +20,12 @@ function InitMap(lat, long) {
         tmap.addControl(nav, 'top-right');
     
         gMarker = new tt.Marker().setLngLat([long, lat]).addTo(tmap);
+        tmap.setZoom(15);
     
         //error with tomtom where the first run wont actually center the map
         //usually works after the second or third run
         setInterval(function() {    
             tmap.setCenter([long, lat]);
-            tmap.setZoom(15);
         }, 2000);
     } else {
         let locationDebugText = document.getElementById("locationDebugText");
